@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>🎮 숫자 게임 모음</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #gameContainer {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 숫자 게임을 골라보세요!</h1>
+  <button onclick="loadGame('guess.html')">🔢 숫자 맞히기</button>
+  <button onclick="loadGame('baseball.html')">⚾ 야구 게임</button>
+
+  <div id="gameContainer">게임을 선택하세요!</div>
+
+  <script>
+    async function loadGame(file) {
+      try {
+        const res = await fetch(file);
+        const html = await res.text();
+        document.getElementById("gameContainer").innerHTML = html;
+      } catch (e) {
+        document.getElementById("gameContainer").innerHTML = '<p>게임을 불러오는 데 실패했어요 🥲</p>';
+        console.error(e);
+      }
+    }
+  </script>
+</body>
+</html>
