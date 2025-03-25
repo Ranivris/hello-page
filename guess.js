@@ -21,7 +21,17 @@ function checkGuess() {
   document.getElementById("attempts").textContent = `시도 횟수: ${attempts}`;
 
   const logItem = document.createElement("li");
-  logItem.textContent = `#${attempts} → ${guess}`;
+
+  if (guess > answer) {
+     logItem.textContent = `#${attempts} → ${guess}, 큰 수`;
+  }
+  else if (guess > answer) {
+     logItem.textContent = `#${attempts} → ${guess}, 작은 수`;
+  }
+  else{
+     logItem.textContent = `#${attempts} 맞 춘 듯?`;
+  }
+  
   document.getElementById("logList").appendChild(logItem);
 
   input.value = '';
