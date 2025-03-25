@@ -46,4 +46,10 @@ function checkBaseball() {
 
   document.getElementById("baseballInput").value = '';
   document.getElementById("baseballInput").focus();
+
+  document.getElementById("guessInput").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    checkGuess(); // 또는 checkBaseball();
+  }
+});
 }
