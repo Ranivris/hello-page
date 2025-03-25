@@ -41,19 +41,16 @@
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = html;
 
-      const scriptTag = tempDiv.querySelector("script[src]");
-      if (scriptTag) {
-        const existing = document.querySelector(`script[src="${scriptTag.src}"]`);
-        if (existing) {
-          existing.remove(); // 기존 스크립트 제거
-        }
+const scriptTag = tempDiv.querySelector("script[src]");
+if (scriptTag) {
+  const existingScripts = document.querySelectorAll(`script[src="${scriptTag.src}"]`);
+  existingScripts.forEach(script => script.remove()); // 🔥 전부 제거!
 
-        // 새로 script 태그 동적으로 생성해서 실행되도록 body에 붙이기
-        const newScript = document.createElement("script");
-        newScript.src = scriptTag.src;
-        newScript.defer = true; // 선택사항 (렌더링 끝난 후 실행)
-        document.body.appendChild(newScript);
-      }
+  const newScript = document.createElement("script");
+  newScript.src = scriptTag.src;
+  newScript.defer = true;
+  document.body.appendChild(newScript);
+}
     } catch (e) {
       document.getElementById("gameContainer").innerHTML =
         "<p>게임을 불러오는 데 실패했어요 😢</p>";
