@@ -1,4 +1,4 @@
-const answer = generateAnswer();
+const baseballAnswer = generateAnswer();
 let tries = 0;
 
 function generateAnswer() {
@@ -29,8 +29,8 @@ function checkBaseball() {
   let ball = 0;
 
   guess.forEach((n, i) => {
-    if (n === answer[i]) strike++;
-    else if (answer.includes(n)) ball++;
+    if (n === baseballAnswer[i]) strike++;
+    else if (baseballAnswer.includes(n)) ball++;
   });
 
   const logItem = document.createElement("li");
