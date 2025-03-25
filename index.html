@@ -26,17 +26,31 @@
 
   <div id="gameContainer">게임을 선택하세요!</div>
 
-  <script>
-    async function loadGame(file) {
-      try {
-        const res = await fetch(file);
-        const html = await res.text();
-        document.getElementById("gameContainer").innerHTML = html;
-      } catch (e) {
-        document.getElementById("gameContainer").innerHTML = '<p>게임을 불러오는 데 실패했어요 🥲</p>';
-        console.error(e);
+<script>
+  async function loadGame(file) {
+    try {
+      const res = await fetch(file);
+      const html = await res.text();
+      document.getElementById("gameContainer").innerHTML = html;
+
+      // 💡 삽입된 HTML 안에서 <script src="..."> 찾기
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = html;
+
+      const scriptTag = tempDiv.querySelector("script[src]");
+      if (scriptTag) {
+        const newScript = document.createElement("script");
+        newScript.src = scriptTag.src;
+        newScript.defer = true; // 선택사항
+        document.body.appendChild(newScript);
       }
+    } catch (e) {
+      document.getElementById("gameContainer").innerHTML =
+        "<p>게임을 불러오는 데 실패했어요 😢</p>";
+      console.error(e);
     }
-  </script>
+  }
+</script>
+
 </body>
 </html>
