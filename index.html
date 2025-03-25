@@ -13,13 +13,18 @@
 
   <p id="resultMessage"></p>
   <p id="attempts">시도 횟수: 0</p>
+  <p><strong>입력 기록:</strong></p>
+  <ul id="logList"></ul> <!-- 입력 로그 출력 -->
 
   <script>
     const answer = Math.floor(Math.random() * 100) + 1;
     let attempts = 0;
 
     function checkGuess() {
-      const guess = parseInt(document.getElementById('guessInput').value);
+      const guessInput = document.getElementById('guessInput');
+      const guess = parseInt(guessInput.value);
+      if (isNaN(guess)) return;  // 숫자 아닌 경우 무시
+
       attempts++;
 
       let message = '';
@@ -31,8 +36,19 @@
         message = `정답입니다! 🎉 ${attempts}번 만에 맞췄어요!`;
       }
 
+      // 메시지 & 시도 횟수 업데이트
       document.getElementById('resultMessage').textContent = message;
       document.getElementById('attempts').textContent = `시도 횟수: ${attempts}`;
+
+      // 입력 기록 추가
+      const logList = document.getElementById('logList');
+      const listItem = document.createElement('li');
+      listItem.textContent = `#${attempts} → ${guess}`;
+      logList.appendChild(listItem);
+
+      // 입력창 초기화
+      guessInput.value = '';
+      guessInput.focus();
     }
   </script>
 </body>
