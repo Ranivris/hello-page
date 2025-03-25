@@ -43,7 +43,12 @@
       // 입력 기록 추가
       const logList = document.getElementById('logList');
       const listItem = document.createElement('li');
-      listItem.textContent = `#${attempts} → ${guess}`;
+      if (guess > answer) {
+        listItem.textContent = `#${attempts} → ${guess} 큼`;
+      }
+      else {
+        listItem.textContent = `#${attempts} → ${guess} 작음`;
+      }
       logList.appendChild(listItem);
 
       // 입력창 초기화
