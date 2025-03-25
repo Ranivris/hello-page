@@ -1,6 +1,11 @@
 const baseballAnswer = generateAnswer();
 let tries = 0;
 
+document.getElementById("guessInput").addEventListener("keydown", function (e) {
+if (e.key === "Enter") {
+  checkBaseball(); // 또는 checkBaseball();
+}
+
 function generateAnswer() {
   const nums = [];
   while (nums.length < 3) {
@@ -46,10 +51,5 @@ function checkBaseball() {
 
   document.getElementById("baseballInput").value = '';
   document.getElementById("baseballInput").focus();
-
-  document.getElementById("guessInput").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    checkGuess(); // 또는 checkBaseball();
-  }
 });
 }
