@@ -25,7 +25,7 @@ function checkGuess() {
   if (guess > answer) {
      logItem.textContent = `#${attempts} → ${guess}, 큰 수`;
   }
-  else if (guess > answer) {
+  else if (guess < answer) {
      logItem.textContent = `#${attempts} → ${guess}, 작은 수`;
   }
   else{
