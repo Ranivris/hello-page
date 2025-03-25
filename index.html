@@ -46,8 +46,11 @@
       if (guess > answer) {
         listItem.textContent = `#${attempts} → ${guess} 큼`;
       }
-      else {
+      else  (guess < answer){
         listItem.textContent = `#${attempts} → ${guess} 작음`;
+      }
+      else{
+        listItem.textContent = `#${attempts} → 정답!`;
       }
       logList.appendChild(listItem);
 
