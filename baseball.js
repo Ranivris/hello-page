@@ -1,13 +1,6 @@
 const baseballAnswer = generateAnswer();
 let tries = 0;
 
-// ✅ 이벤트 등록: 엔터 키로 checkBaseball 실행
-document.getElementById("baseballInput").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    checkBaseball();
-  }
-});
-
 // ✅ 랜덤 숫자 생성
 function generateAnswer() {
   const nums = [];
@@ -56,3 +49,11 @@ function checkBaseball() {
   document.getElementById("baseballInput").value = '';
   document.getElementById("baseballInput").focus();
 }
+
+
+// ✅ 이벤트 등록: 엔터 키로 checkBaseball 실행
+document.getElementById("baseballInput").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    checkBaseball();
+  }
+});
