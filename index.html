@@ -29,25 +29,35 @@
 <script>
   async function loadGame(file) {
     try {
+      // 1. HTML 파일 불러오기
       const res = await fetch(file);
       const html = await res.text();
-      document.getElementById("gameContainer").innerHTML = html;
 
-      // 💡 삽입된 HTML 안에서 <script src="..."> 찾기
+      // 2. gameContainer 안에 내용 삽입
+      const gameContainer = document.getElementById("gameContainer");
+      gameContainer.innerHTML = html;
+
+      // 3. 삽입된 HTML 안에서 <script src="..."> 태그 추출
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = html;
 
       const scriptTag = tempDiv.querySelector("script[src]");
       if (scriptTag) {
+        const existing = document.querySelector(`script[src="${scriptTag.src}"]`);
+        if (existing) {
+          existing.remove(); // 기존 스크립트 제거
+        }
+
+        // 새로 script 태그 동적으로 생성해서 실행되도록 body에 붙이기
         const newScript = document.createElement("script");
         newScript.src = scriptTag.src;
-        newScript.defer = true; // 선택사항
+        newScript.defer = true; // 선택사항 (렌더링 끝난 후 실행)
         document.body.appendChild(newScript);
       }
     } catch (e) {
       document.getElementById("gameContainer").innerHTML =
         "<p>게임을 불러오는 데 실패했어요 😢</p>";
-      console.error(e);
+      console.error("loadGame 실패:", e);
     }
   }
 </script>
