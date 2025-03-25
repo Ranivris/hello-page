@@ -1,11 +1,14 @@
 const baseballAnswer = generateAnswer();
 let tries = 0;
 
-document.getElementById("guessInput").addEventListener("keydown", function (e) {
-if (e.key === "Enter") {
-  checkBaseball(); // 또는 checkBaseball();
-}
+// ✅ 이벤트 등록: 엔터 키로 checkBaseball 실행
+document.getElementById("baseballInput").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    checkBaseball();
+  }
+});
 
+// ✅ 랜덤 숫자 생성
 function generateAnswer() {
   const nums = [];
   while (nums.length < 3) {
@@ -15,6 +18,7 @@ function generateAnswer() {
   return nums;
 }
 
+// ✅ 게임 로직
 function checkBaseball() {
   const input = document.getElementById("baseballInput").value;
   if (!/^[1-9]{3}$/.test(input)) {
@@ -51,5 +55,4 @@ function checkBaseball() {
 
   document.getElementById("baseballInput").value = '';
   document.getElementById("baseballInput").focus();
-});
 }
